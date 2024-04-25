@@ -1,0 +1,63 @@
+CODIGO DE LABORATORIO 7 SEMANA 7
+CURSO: MULTIPLATAFORMA
+ALUMNO: ETHAN ARREDONDO
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class Pokemons {
+  final String nombre;
+  final String tipo;
+  final String imagen;
+
+  Pokemons({required this.nombre, required this.tipo, required this.imagen});
+}
+
+List<Pokemons> pokemonList = [
+  Pokemons(nombre: "Bulbasour", tipo: "PLANTA", imagen: "1"),
+  Pokemons(nombre: "Ivysaur", tipo: "PLANTA", imagen: "2"),
+  Pokemons(nombre: "Venusaur", tipo: "PLANTA Y VENENO", imagen: "3"),
+  Pokemons(nombre: "Charmander", tipo: "FUEGO", imagen: "4"),
+  Pokemons(nombre: "Charmeleon", tipo: "FUEGO", imagen: "5"),
+  Pokemons(nombre: "Charizard", tipo: "FUEGO Y VOLADOR", imagen: "6"),
+];
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'ListView Example',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Lista de Pokemons'),
+        ),
+        body: ListView.builder(
+          itemCount: pokemonList.length,
+          itemBuilder: (context, index) {
+            return ExpansionTile(
+              title: Text(
+                pokemonList[index].nombre,
+                style: TextStyle(fontWeight: FontWeight.bold),
+
+                ),
+              children: [
+                Text(
+                  pokemonList[index].tipo,
+                ),
+                Image.network(
+                  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemonList[index].imagen}.png",
+                  width: 50, 
+                  height: 50,
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
